@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Uncommon HTML Bug Solution</title>
+</head>
+<body>
+  <div id="myDiv">
+    This text should be visible.
+  </div>
+
+  <script>
+    const newDiv = document.createElement('div');
+    newDiv.id = 'dynamicDiv';
+    document.body.appendChild(newDiv);
+
+    // Solution: Use a 'DOMContentLoaded' event listener to ensure the element is fully added to the DOM.
+    document.addEventListener('DOMContentLoaded', function() {
+        newDiv.innerHTML = "<p>This text should also be visible.</p><p>This is the dynamic content.</p>";
+        document.getElementById('dynamicDiv').style.color = 'blue';
+    });
+  </script>
+</body>
+</html>
