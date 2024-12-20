@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Uncommon HTML Bug</title>
+</head>
+<body>
+  <div id="myDiv">
+    This text should be visible.
+  </div>
+
+  <script>
+    // Incorrectly using innerHTML to modify the content of a dynamically created element
+    const newDiv = document.createElement('div');
+    newDiv.id = 'dynamicDiv';
+    document.body.appendChild(newDiv);
+    newDiv.innerHTML = "<p>This text should also be visible.</p><p>This is the dynamic content.</p>";
+    // The bug: Attempting to access the element before it is added to the DOM.
+    // This is particularly hard to find because it is the 'innerHTML' call that fails silently.
+    setTimeout(function(){
+        document.getElementById('dynamicDiv').style.color = 'blue';
+    }, 0);
+
+  </script>
+</body>
+</html>
